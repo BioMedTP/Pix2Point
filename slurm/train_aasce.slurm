@@ -6,7 +6,7 @@
 #     sbatch --partition=<gpu_partition> slurm/train_aasce.slurm
 #   from a pretrained backbone (only the backbone initialisation differs):
 #     sbatch --partition=<gpu_partition> \
-#       --export=ALL,PRETRAINED_BACKBONE=/path/to/pretrained_backbone.pth slurm/train_aasce.slurm
+#       --export=ALL,PRETRAINED_BACKBONE=weights/unet_backbone_last.pth slurm/train_aasce.slurm
 #
 # Submit from the repository root. Resources of the reference runs: one 40 GB
 # GPU (batch size 8); early stopping on the validation error (patience 40 epochs).

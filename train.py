@@ -8,7 +8,7 @@ From scratch::
 From a pretrained backbone (only the backbone initialisation differs)::
 
     python train.py --data-root <AASCE_DATA> --output-dir runs/pretrained \
-        --pretrained-backbone <weights>/pretrained_backbone.pth
+        --pretrained-backbone weights/unet_backbone_last.pth
 
 Writes ``<output-dir>/train/``: ``config.json``, the three checkpoints
 (``unet_backbone[_best_mre|_last].pth`` + ``prototype_layer[_best_mre|_last].pth``),

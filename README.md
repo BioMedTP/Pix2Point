@@ -72,12 +72,12 @@ pip install -r requirements.txt --extra-index-url https://download.pytorch.org/w
 python prepare_aasce.py --aasce-root <AASCE_ROOT> --output-dir <DATA_ROOT>
 
 # 3. Pretrained backbone (from Hugging Face, into weights/)
-pip install huggingface_hub
-huggingface-cli download <HF_REPO_ID> --include "*.pth" --local-dir weights
+pip install -U huggingface_hub
+hf download sifaoso/Pix2Point unet_backbone_last.pth --local-dir weights
 
 # 4. Training from the pretrained backbone (one GPU with >= 40 GB)
 python train.py --data-root <DATA_ROOT> --output-dir runs/pretrained \
-    --pretrained-backbone weights/pretraining/pretrained_backbone.pth
+    --pretrained-backbone weights/unet_backbone_last.pth
 
 # 5. Inference and evaluation of the trained model (GPU, or CPU in ~3 min)
 python predict.py --data-root <DATA_ROOT> --weights-dir runs/pretrained/train --output-dir runs/pretrained/test
@@ -161,16 +161,44 @@ Expected layout of `<DATA_ROOT>`:
 
 ## Weights
 
-The weights of the **self-supervised pretrained backbone** are released,
-on Hugging Face (`<HF_REPO_ID>`). From the root of this repository:
+The weights of the **self-supervised pretrained backbone** (Pix2Rep-v2
+pretraining on the AASCE training images, see
+[Self-supervised pretraining](#self-supervised-pretraining-pix2rep-v2)) are
+released on Hugging Face:
+[sifaoso/Pix2Point](https://huggingface.co/sifaoso/Pix2Point).
+
+| file | content |
+|---|---|
+| `unet_backbone_last.pth` | last pretraining epoch — **the default backbone to use for training** |
+| `unet_backbone_best.pth` | lowest pretraining validation loss (not used in the paper) |
+
+From the root of this repository:
 
 ```bash
-pip install huggingface_hub
-huggingface-cli download <HF_REPO_ID> --include "*.pth" --local-dir weights
+pip install -U huggingface_hub
+# default: last-epoch backbone -> weights/unet_backbone_last.pth
+hf download sifaoso/Pix2Point unet_backbone_last.pth --local-dir weights
+# optional: both checkpoints
+hf download sifaoso/Pix2Point --include "*.pth" --local-dir weights
 ```
 
-This gives `weights/pretraining/pretrained_backbone.pth`, the starting point
-of "training from a pretrained backbone". It is a backbone only (no landmark
+Without the Hugging Face CLI:
+
+```bash
+mkdir -p weights
+wget -P weights https://huggingface.co/sifaoso/Pix2Point/resolve/main/unet_backbone_last.pth
+```
+
+Or from Python:
+
+```python
+from huggingface_hub import hf_hub_download
+path = hf_hub_download("sifaoso/Pix2Point", "unet_backbone_last.pth", local_dir="weights")
+```
+
+This gives `weights/unet_backbone_last.pth`, the starting point of "training
+from a pretrained backbone" (`train.py --pretrained-backbone
+weights/unet_backbone_last.pth`). It is a backbone only (no landmark
 prototypes), produced by `pretrain.py`, so it cannot be used for inference by
 itself. You can also choose to train Pix2Point from scratch, by skipping initialization from pre-trained weights.
 
@@ -231,7 +259,7 @@ python train.py --data-root <DATA_ROOT> --output-dir runs/scratch
 
 # from the pretrained backbone (the only difference: the initial backbone weights)
 python train.py --data-root <DATA_ROOT> --output-dir runs/pretrained \
-    --pretrained-backbone weights/pretraining/pretrained_backbone.pth
+    --pretrained-backbone weights/unet_backbone_last.pth
 ```
 
 Then evaluate the trained model with `predict.py` (see
@@ -351,7 +379,7 @@ sbatch --partition=<gpu_partition> --export=ALL,DATA_ROOT=<DATA_ROOT> slurm/trai
 
 # training from the pretrained backbone, then inference
 sbatch --partition=<gpu_partition> \
-    --export=ALL,DATA_ROOT=<DATA_ROOT>,PRETRAINED_BACKBONE=weights/pretraining/pretrained_backbone.pth \
+    --export=ALL,DATA_ROOT=<DATA_ROOT>,PRETRAINED_BACKBONE=weights/unet_backbone_last.pth \
     slurm/train_aasce.slurm
 
 # self-supervised pretraining

@@ -1,0 +1,19 @@
+{
+  "split": "test",
+  "n_official": 128,
+  "n_excluded": 2,
+  "n_used": 126,
+  "criterion": "visual inspection of the annotations: corners of two adjacent vertebrae misplaced with respect to each other (crossed corners or overlapping vertebrae); no automatic rule or threshold",
+  "excluded": [
+    {
+      "subject": "sunhl-1th-01-Mar-2017-311_C_AP",
+      "aasce_file": "sunhl-1th-01-Mar-2017-311 C AP.jpg",
+      "inconsistent_vertebrae": "T1/T2"
+    },
+    {
+      "subject": "sunhl-1th-01-Mar-2017-319_A_AP",
+      "aasce_file": "sunhl-1th-01-Mar-2017-319 A AP.jpg",
+      "inconsistent_vertebrae": "L4/L5"
+    }
+  ]
+}

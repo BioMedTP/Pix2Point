@@ -1,0 +1,11 @@
+# Tested environment: Python 3.12.11, CUDA 12.6 wheels of PyTorch.
+#   pip install -r requirements.txt --extra-index-url https://download.pytorch.org/whl/cu126
+torch==2.13.0
+numpy==2.3.3
+nibabel==5.4.2
+einops==0.8.2
+albumentations==2.0.8
+albucore==0.0.24
+opencv-python-headless==5.0.0.93
+scipy==1.17.1
+matplotlib==3.10.6

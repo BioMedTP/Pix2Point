@@ -1,0 +1,7 @@
+__pycache__/
+.vscode/
+.venv/
+weights/
+runs/
+*.out
+*.err

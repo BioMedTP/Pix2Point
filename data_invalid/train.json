@@ -1,0 +1,59 @@
+{
+  "split": "train",
+  "n_official": 481,
+  "n_excluded": 10,
+  "n_used": 471,
+  "criterion": "visual inspection of the annotations: corners of two adjacent vertebrae misplaced with respect to each other (crossed corners or overlapping vertebrae); no automatic rule or threshold",
+  "excluded": [
+    {
+      "subject": "sunhl-1th-06-Jan-2017-182_A_AP",
+      "aasce_file": "sunhl-1th-06-Jan-2017-182 A AP.jpg",
+      "inconsistent_vertebrae": "T10/T11"
+    },
+    {
+      "subject": "sunhl-1th-10-Jan-2017-243_C_AP",
+      "aasce_file": "sunhl-1th-10-Jan-2017-243 C AP.jpg",
+      "inconsistent_vertebrae": "T1/T2"
+    },
+    {
+      "subject": "sunhl-1th-25-Jul-2016-15_B_AP",
+      "aasce_file": "sunhl-1th-25-Jul-2016-15 B AP.jpg",
+      "inconsistent_vertebrae": "L4/L5"
+    },
+    {
+      "subject": "sunhl-1th-25-Jul-2016-41_B_AP",
+      "aasce_file": "sunhl-1th-25-Jul-2016-41 B AP.jpg",
+      "inconsistent_vertebrae": "T6/T7"
+    },
+    {
+      "subject": "sunhl-1th-25-Jul-2016-49_A_AP",
+      "aasce_file": "sunhl-1th-25-Jul-2016-49 A AP.jpg",
+      "inconsistent_vertebrae": "L2/L3"
+    },
+    {
+      "subject": "sunhl-1th-25-Jul-2016-51_A_AP",
+      "aasce_file": "sunhl-1th-25-Jul-2016-51 A AP.jpg",
+      "inconsistent_vertebrae": "L4/L5"
+    },
+    {
+      "subject": "sunhl-1th-25-Jul-2016-51_B_AP",
+      "aasce_file": "sunhl-1th-25-Jul-2016-51 B AP.jpg",
+      "inconsistent_vertebrae": "L4/L5"
+    },
+    {
+      "subject": "sunhl-1th-25-Jul-2016-61_A_AP",
+      "aasce_file": "sunhl-1th-25-Jul-2016-61 A AP.jpg",
+      "inconsistent_vertebrae": "L4/L5"
+    },
+    {
+      "subject": "sunhl-1th-26-Jul-2016-76_C_AP",
+      "aasce_file": "sunhl-1th-26-Jul-2016-76 C AP.jpg",
+      "inconsistent_vertebrae": "T1/T2"
+    },
+    {
+      "subject": "sunhl-1th-30-Dec-2016-161_A_AP",
+      "aasce_file": "sunhl-1th-30-Dec-2016-161 A AP.jpg",
+      "inconsistent_vertebrae": "L4/L5"
+    }
+  ]
+}
